@@ -123,7 +123,7 @@ SubstanceImporter:
     materialInformation:
       serializedVersion: 5
       offset: {x: 0, y: 0}
-      scale: {x: 10, y: 10}
+      scale: {x: 1, y: 1}
       generateMipmaps: 1
       generateAllOutputs: 1
       animationUpdateRate: 42
