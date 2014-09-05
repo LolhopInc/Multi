@@ -18,7 +18,7 @@ public class NetworkManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 
 	void OnGUI () {
@@ -43,7 +43,10 @@ public class NetworkManager : MonoBehaviour {
 
 		SpawnSpot mySpawnSpot = spawnSpots [Random.Range (0, spawnSpots.Length)];
 
-		PhotonNetwork.Instantiate ("PlayerController", mySpawnSpot.transform.position, mySpawnSpot.transform.rotation, 0);
+		GameObject myPlayer = (GameObject) PhotonNetwork.Instantiate ("PlayerController", mySpawnSpot.transform.position, mySpawnSpot.transform.rotation, 0);
 		standbyCamera.enabled = false;
+		((MonoBehaviour)myPlayer.GetComponent("FPSInputController")).enabled = true;
+		((MonoBehaviour)myPlayer.GetComponent("MouseLook")).enabled = true;
+		myPlayer.transform.FindChild ("Main Camera").gameObject.SetActive (true);
 		}
 }
