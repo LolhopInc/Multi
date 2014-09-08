@@ -5,8 +5,11 @@ public class NetworkPlayer : Photon.MonoBehaviour {
 
 	Vector3 realPosition = Vector3.zero;
 	Quaternion realRotation = Quaternion.identity;
+	Animator anim = GetComponent<Animator>();
 
 	float lastUpdateTime;
+	float realSpeed;
+	bool isJumping;
 	// Use this for initialization
 	void Start () {
 	
@@ -28,6 +31,8 @@ public class NetworkPlayer : Photon.MonoBehaviour {
 				// This is for OUR player... We must send our actual position to the network
 			stream.SendNext(transform.position);
 			stream.SendNext(transform.rotation);
+			stream.SendNext(anim.GetBool("Jump"));
+			stream.SendNext(anim.GetFloat("Speed"));
 		} 
 
 		else {
@@ -35,6 +40,9 @@ public class NetworkPlayer : Photon.MonoBehaviour {
 
 			realPosition = (Vector3)stream.ReceiveNext();
 			realRotation = (Quaternion)stream.ReceiveNext();
+			isJumping = (bool)stream.ReceiveNext();
+			realSpeed = (float)stream.ReceiveNext();
+			
 		}
 	}
 }
