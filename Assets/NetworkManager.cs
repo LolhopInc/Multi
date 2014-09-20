@@ -5,6 +5,7 @@ public class NetworkManager : MonoBehaviour {
 
 	public GameObject standbyCamera;
 	public string versionID;
+	public bool offlineMode = false;
 	SpawnSpot [] spawnSpots;
 	// Use this for initialization
 	void Start () {
@@ -13,8 +14,13 @@ public class NetworkManager : MonoBehaviour {
 	}
 
 	void Connect () {
-		PhotonNetwork.ConnectUsingSettings(versionID);
-		Debug.Log ("Connected Successfully");
+		if (offlineMode) {
+			PhotonNetwork.offlineMode = true;
+				} 
+		else {
+						PhotonNetwork.ConnectUsingSettings (versionID);
+						Debug.Log ("Connected Successfully");
+				}
 	}
 
 	// Update is called once per frame
@@ -36,7 +42,7 @@ public class NetworkManager : MonoBehaviour {
 	}
 
 	void OnJoinedRoom() {
-
+		Screen.showCursor = false;
 		if (spawnSpots == null) {
 			Debug.Log("No spawn points found");
 			return;

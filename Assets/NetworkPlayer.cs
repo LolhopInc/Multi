@@ -13,7 +13,7 @@ public class NetworkPlayer : Photon.MonoBehaviour {
 	void Start () {
 		anim = GetComponent<Animator>();
 		if(anim == null) {
-			Debug.LogError ("Something's very fucked up, there's no  Animator Component on this prefab! ZOMG!");
+			Debug.LogError ("Something's very fucked up, there's no Animator Component on this prefab! ZOMG!");
 		}
 	}
 	
