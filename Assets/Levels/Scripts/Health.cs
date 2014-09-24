@@ -13,8 +13,8 @@ public class Health : MonoBehaviour {
 	}
 	
 
-	void TakeDamage (float amt) {
-		currentHitPoints -= amt;
+	public void TakeDamage (float d) {
+		currentHitPoints -= d;
 
 		if (currentHitPoints <= 0) {
 			Die();
