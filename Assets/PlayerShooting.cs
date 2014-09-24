@@ -7,13 +7,14 @@ public class PlayerShooting : MonoBehaviour {
 	float cooldown = 0;
 	public float damage = 25f;
 	
-	// Update is called once per frame
+	// Update is called once per frame.
 	void Update () {
 		cooldown -= Time.deltaTime;
 		
 		if(Input.GetButton("Fire1")) {
 			// Player is holding shoot button - Fire!
 			Fire ();
+			// Note that Fire cannot take excessive (massive) amounts of time to run
 		}
 		
 	}
@@ -33,8 +34,7 @@ public class PlayerShooting : MonoBehaviour {
 		if(hitTransform != null) {
 			Debug.Log ("Hit: " + hitTransform.name);
 			
-			// We could do a special effect at the hit location
-			// DoRicochetEffectAt( hitPoint );
+			// Do special effect at hit location (hitPoint) here
 			
 			Health h = hitTransform.GetComponent<Health>();
 			
@@ -43,7 +43,7 @@ public class PlayerShooting : MonoBehaviour {
 				h = hitTransform.GetComponent<Health>();
 			}
 			
-			// Once we reach here, hitTransform may not be the hitTransform we started with!
+			// Once we reach here, hitTransform may have been changed
 			
 			if(h != null) {
 				h.TakeDamage( damage );
@@ -66,17 +66,14 @@ public class PlayerShooting : MonoBehaviour {
 		foreach(RaycastHit hit in hits) {
 			if(hit.transform != this.transform && ( closestHit==null || hit.distance < distance ) ) {
 				// We have hit something that is:
-				// a) not us
-				// b) the first thing we hit (that is not us)
-				// c) or, if not b, is  closer than the previous closest hit
+				// a) not us || the first thing we hit (that is not us)|| if !b, is  closer than the previous closest hit
 				
 				closestHit = hit.transform;
 				distance = hit.distance;
 				hitPoint = hit.point;
 			}
 		}
-		
-		// closestHit is now either still null OR it contains the closest thing that is a valid thing to hit
+
 		
 		return closestHit;
 		
