@@ -7,7 +7,7 @@ public class PlayerShooting : MonoBehaviour {
 	float cooldown = 0;
 	public float damage = 25f;
 	
-	// Update is called once per frame.
+	// Update is called once per frame
 	void Update () {
 		cooldown -= Time.deltaTime;
 		
@@ -21,6 +21,7 @@ public class PlayerShooting : MonoBehaviour {
 	
 	void Fire() {
 		if(cooldown > 0) {
+			// if not enough time has passed since the last shot, exit the procedure
 			return;
 		}
 
@@ -43,7 +44,7 @@ public class PlayerShooting : MonoBehaviour {
 				h = hitTransform.GetComponent<Health>();
 			}
 			
-			// Once we reach here, hitTransform may have been changed
+			// Once we reach here, hitTransform may have been changed inside above while loop
 			
 			if(h != null) {
 				h.TakeDamage( damage );
