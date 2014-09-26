@@ -45,7 +45,7 @@ SubstanceImporter:
         texture: {instanceID: 0}
     - name: Drips_Angle
       value:
-        scalar[0]: .75
+        scalar[0]: .289999992
         scalar[1]: 0
         scalar[2]: 0
         scalar[3]: 0
@@ -66,21 +66,21 @@ SubstanceImporter:
         texture: {instanceID: 0}
     - name: Patterns_Type
       value:
-        scalar[0]: 0
+        scalar[0]: 1
         scalar[1]: 0
         scalar[2]: 0
         scalar[3]: 0
         texture: {instanceID: 0}
     - name: Rust_leaks
       value:
-        scalar[0]: .5
+        scalar[0]: 1
         scalar[1]: 0
         scalar[2]: 0
         scalar[3]: 0
         texture: {instanceID: 0}
     - name: Depth
       value:
-        scalar[0]: 0
+        scalar[0]: 1
         scalar[1]: 0
         scalar[2]: 0
         scalar[3]: 0
@@ -101,7 +101,7 @@ SubstanceImporter:
         texture: {instanceID: 0}
     - name: Emboss
       value:
-        scalar[0]: .5
+        scalar[0]: 1
         scalar[1]: 0
         scalar[2]: 0
         scalar[3]: 0
