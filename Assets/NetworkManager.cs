@@ -53,6 +53,7 @@ public class NetworkManager : MonoBehaviour {
 		GameObject myPlayer = (GameObject) PhotonNetwork.Instantiate ("PlayerController", mySpawnSpot.transform.position, mySpawnSpot.transform.rotation, 0);
 		standbyCamera.SetActive(false);
 		((MonoBehaviour)myPlayer.GetComponent("MouseLook")).enabled = true;
+		((MonoBehaviour)myPlayer.GetComponent("PlayerShooting")).enabled = true;
 		((MonoBehaviour)myPlayer.GetComponent("PlayerMovement")).enabled = true;
 		myPlayer.transform.FindChild ("Main Camera").gameObject.SetActive (true);
 		}
