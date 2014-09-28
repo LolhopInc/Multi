@@ -47,7 +47,8 @@ public class PlayerShooting : MonoBehaviour {
 			// Once we reach here, hitTransform may have been changed inside above while loop
 			
 			if(h != null) {
-				h.TakeDamage( damage );
+				PhotonView pview = h.GetComponent<PhotonView>();
+				pview.RPC("TakeDamage", PhotonTargets.All, damage);
 			}
 			
 			
