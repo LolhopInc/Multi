@@ -8,7 +8,7 @@ public class NetworkPlayer : Photon.MonoBehaviour {
 	
 	Animator anim;
 	
-	
+	bool gotFirstUpdate = false;
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator>();
@@ -44,6 +44,13 @@ public class NetworkPlayer : Photon.MonoBehaviour {
 			realRotation = (Quaternion)stream.ReceiveNext();
 			anim.SetFloat("Speed", (float)stream.ReceiveNext());
 			anim.SetBool("Jumping", (bool)stream.ReceiveNext());
+
+			if (gotFirstUpdate == false) {
+				transform.position = realPosition;
+				transform.rotation = realRotation;
+				gotFirstUpdate = true;
+			}
+
 		}
 		
 	}
