@@ -32,8 +32,12 @@ public class NetworkManager : MonoBehaviour {
 	void OnDestroy() {
 		PlayerPrefs.SetString ("Username", PhotonNetwork.player.name);
 	}
+	public void addChatMessage (string m) {
+		GetComponent<PhotonView> ().RPC ("sendChatMessage", PhotonTargets.AllBuffered, m);
+	}
 
-	public void addChatMessage (string message) {
+	[RPC]
+	void sendChatMessage (string message) {
 
 		while (chatMessages.Count >= maxMessages) {
 			chatMessages.RemoveAt(0);
