@@ -48,7 +48,7 @@ public class PlayerShooting : MonoBehaviour {
 			
 			if(h != null) {
 				PhotonView pview = h.GetComponent<PhotonView>();
-				pview.RPC("TakeDamage", PhotonTargets.All, damage);
+				pview.RPC("TakeDamage", PhotonTargets.AllBuffered, damage);
 			}
 			
 			
