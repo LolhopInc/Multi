@@ -8,7 +8,7 @@ public class NetworkPlayer : Photon.MonoBehaviour {
 	
 	Animator anim;
 	
-	
+	bool gotFirstUpdate = false;
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator>();
@@ -20,7 +20,7 @@ public class NetworkPlayer : Photon.MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if( photonView.isMine ) {
-			// Do nothing -- the character motor/input/etc... is moving us
+			// Do nothing, character scripts have us covered
 		}
 		else {
 			transform.position = Vector3.Lerp(transform.position, realPosition, 0.1f);
@@ -30,7 +30,7 @@ public class NetworkPlayer : Photon.MonoBehaviour {
 	
 	public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
 		if(stream.isWriting) {
-			// This is OUR player. We need to send our actual position to the network.
+			// This is our player. We need to send our actual position to the network.
 			
 			stream.SendNext(transform.position);
 			stream.SendNext(transform.rotation);
@@ -38,13 +38,19 @@ public class NetworkPlayer : Photon.MonoBehaviour {
 			stream.SendNext(anim.GetBool("Jumping"));
 		}
 		else {
-			// This is someone else's player. We need to receive their position (as of a few
-			// millisecond ago, and update our version of that player.
+			// This is someone else's player. We need to receive their sent position, and update our version of their player.
 			
 			realPosition = (Vector3)stream.ReceiveNext();
 			realRotation = (Quaternion)stream.ReceiveNext();
 			anim.SetFloat("Speed", (float)stream.ReceiveNext());
 			anim.SetBool("Jumping", (bool)stream.ReceiveNext());
+
+			if (gotFirstUpdate == false) {
+				transform.position = realPosition;
+				transform.rotation = realRotation;
+				gotFirstUpdate = true;
+			}
+
 		}
 		
 	}
