@@ -114,7 +114,7 @@ public class NetworkManager : MonoBehaviour {
 		SpawnMyPlayer ();
 	}
 	void SpawnMyPlayer() {
-		addChatMessage ("" + PhotonNetwork.player.name + " Joined");
+		addChatMessage("" + PhotonNetwork.player.name + " Joined");
 
 		Screen.showCursor = false;
 		if (spawnSpots == null) {
