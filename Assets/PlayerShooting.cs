@@ -6,6 +6,16 @@ public class PlayerShooting : MonoBehaviour {
 	public float fireRate = 0.5f;
 	float cooldown = 0;
 	public float damage = 25f;
+
+	EffectsManager fxMan;
+
+	void Start () {
+		fxMan = GameObject.FindObjectOfType<EffectsManager> ();
+		if (fxMan == null) {
+			Debug.LogError("Could not find instance of Effects Manager");		
+		}
+	}
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -50,7 +60,10 @@ public class PlayerShooting : MonoBehaviour {
 				PhotonView pview = h.GetComponent<PhotonView>();
 				pview.RPC("TakeDamage", PhotonTargets.AllBuffered, damage);
 			}
-			
+			if (fxMan != null) {
+				fxMan.GetComponent<PhotonView>().RPC ("RifleBullet", PhotonTargets.All, Camera.main.transform.position, hitPoint);
+			}
+
 			
 		}
 		
