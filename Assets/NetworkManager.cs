@@ -14,19 +14,21 @@ public class NetworkManager : MonoBehaviour {
 	int maxMessages = 7;
 	// Use this for initialization
 	void Start () {
-		 spawnSpots = GameObject.FindObjectsOfType<SpawnSpot> ();
+		spawnSpots = GameObject.FindObjectsOfType<SpawnSpot> ();
 		PhotonNetwork.player.name = PlayerPrefs.GetString ("Username", "Scrublord420");
 		chatMessages = new List<string> ();
 	}
 
 	void Connect () {
+		
 		if (offlineMode) {
 
-				} 
+		} 
+		
 		else {
-						PhotonNetwork.ConnectUsingSettings (versionID);
-						Debug.Log ("Connected Successfully");
-				}
+			PhotonNetwork.ConnectUsingSettings (versionID);
+			Debug.Log ("Connected Successfully");
+		}
 	}
 
 	void OnDestroy() {
